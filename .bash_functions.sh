@@ -301,7 +301,7 @@ dockbasher()
 # Kill all "empty" tmux sessions.
 tka()
 {
-    local location = "/home/brandon/.tmux/session"
+    local location="/home/brandon/.tmux/session"
 
     # shellcheck disable=SC2046
     echo $(tmux display-message -p '#S') > "$location"
@@ -327,6 +327,7 @@ vv() {
     VM="$2"
 
     virt-viewer -c "qemu+ssh://$host/system" "$VM" &
+    disown
 
     return 0
 }
