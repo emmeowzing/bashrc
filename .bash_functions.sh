@@ -10,6 +10,7 @@ gitignore()
         ".env"
         ".idea/"
         ".terraform/"
+        "venv/"
     )
 
     for f in "${files[@]}"
