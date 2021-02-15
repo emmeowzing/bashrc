@@ -1,4 +1,73 @@
 ##
+# Get a user's response on a question to set environment variables.
+# Call like `X="$(response "Enter your name: " "Brandon")"`
+# To set a default value on `X` if the user just hits enter.
+response()
+{
+    if [ $# -eq 0 ]
+    then
+        _error "Must submit at least 2 arguments to \`response\` function for IO."
+        exit 1
+    elif [ $# -gt 2 ]
+    then
+        _warning "received >2 arguments at response function, ignoring extra arguments"
+    fi
+
+    question="$1"
+    default="$2"
+
+    read -r -p "$question" var
+    if [ "$var" ]
+    then
+        printf "%s" "$var"
+    else
+        if [ "$default" ]
+        then
+            _warning "Defaulting to $default"
+        else
+            _warning "Attempted to default, but no value given, returning \"\""
+        fi
+        printf "%s" "$default"
+    fi
+
+    return 0
+}
+
+
+##
+# Print an error message to stderr.
+_error()
+{
+    if [ $# -ne 1 ]
+    then
+        printf "Expected 1 argument to \`_error\`, received %s.\\n" "$#" >&2
+        exit 1
+    fi
+
+    local message
+    message="$1"
+
+    printf "\e[2m\e[1mERROR\e[0m\e[2m: %s\e[0m\\n" "$message" >&2
+}
+
+
+##
+# Print a warning message to stderr.
+_warning()
+{
+    if [ $# -ne 1 ]
+    then
+        _error "Expected 1 argument to \`_warning\`, received $#.\\n"
+    fi
+
+    local message
+    message="$1"
+
+    printf "\e[2m\e[1mWARNING\e[0m\e[2m: %s\e[0m\\n" "$message" >&2
+}
+
+
+##
 # Drop a .gitignore in my cwd with the most common files I try not to include.
 gitignore()
 {
@@ -39,12 +108,14 @@ py()
     # Requires shebang line on $program.
     if [ -x "$program" ]
     then
-        # EDIT: adding flake8 as that's yet another good checker.
+        # Adding flake8 as that's yet another good checker.
         flake8 "$program" # this does not return 0 upon completion :/
         mypy "$program" && "$program"
     else
         printf "Please ensure the Python script is executable.\\n" 1>&2
     fi
+
+    return 0
 }
 
 
@@ -349,4 +420,6 @@ clear_containers()
     do 
         docker rmi "$im"
     done
+
+    return 0
 }
