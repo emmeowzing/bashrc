@@ -1,3 +1,5 @@
+#! /bin/bash
+
 ##
 # Get a user's response on a question to set environment variables.
 # Call like `X="$(response "Enter your name: " "Brandon")"`
@@ -7,7 +9,7 @@ response()
     if [ $# -eq 0 ]
     then
         _error "Must submit at least 2 arguments to \`response\` function for IO."
-        exit 1
+        return 1
     elif [ $# -gt 2 ]
     then
         _warning "received >2 arguments at response function, ignoring extra arguments"
@@ -58,6 +60,7 @@ _warning()
     if [ $# -ne 1 ]
     then
         _error "Expected 1 argument to \`_warning\`, received $#.\\n"
+        return 1
     fi
 
     local message
@@ -97,7 +100,7 @@ py()
 {
     if [ $# -ne 1 ]
     then
-        printf "Please provide a Python script.\\n" 1>&2
+        _error "Please provide a Python script."
         return 1
     fi
 
@@ -125,7 +128,7 @@ screenb()
 {
     if [ $# -ne 2 ]
     then
-        printf "\\n\\t** Please provide a name followed by the process string\\n\\n" 1>&2
+        _error "** Please provide a name followed by the process string."
         return 1
     fi
 
@@ -147,9 +150,9 @@ screenb()
 # running and not saved.
 reboot() 
 { 
-    printf "Ignoring reboot command; please use \`/sbin/reboot\` if you truly wish to do this.\\n" 1>&2
+    _warning "Ignoring reboot command; please use \`/sbin/reboot\` if you truly wish to do this."
 
-    return 0
+    return 1
 }
 
 
@@ -158,8 +161,7 @@ reboot()
 # repository).
 exportConda()
 {
-    conda env export > environment.yml
-    conda list -e > requirements.txt
+    pip freeze > requirements.txt
 
     return 0
 }
@@ -172,7 +174,7 @@ ts()
 {
     if [ $# -gt 1 ]
     then
-        printf "Only accepts 0 or 1 arguments, received %s\\n" "$#" 1>&2
+        _error "Only accepts 0 or 1 arguments, received $#"
         return 1
     elif [ $# -eq 1 ]
     then
@@ -214,7 +216,7 @@ st()
 {
     if [ $# -gt 1 ]
     then
-        printf "Only accepts 0 or 1 arguments, received %s\\n" "$#" 1>&2
+        _error "Only accepts 0 or 1 arguments, received $#"
         return 1
     elif [ $# -eq 1 ]
     then
@@ -257,7 +259,7 @@ allocate()
 {
     if [ $# -ne 2 ]
     then
-        printf "** Please provide a disk size (in GiB) and path to file.\\n" 1>&2
+        _error "** Please provide a disk size (in GiB) and path to file."
         return 1
     fi
 
@@ -277,7 +279,7 @@ rbr()
 {
     if [ $# -ne 1 ]
     then
-        printf "Please provide <user>@<domain> to shut down\\n" 1>&2
+        _error "Please provide <user>@<domain> to shut down."
         return 1
     fi
 
@@ -285,6 +287,8 @@ rbr()
 
     credentials="$1"
     read -r -p "Are you sure? (Y/n) " answer
+
+    sleep 2
 
     if [[ "$answer" =~ ^[yY].* ]]
     then
@@ -307,7 +311,7 @@ vmproccount()
     procs=$(nproc)
     domains=$(virsh list --name)
 
-    if [ $procs -lt 4 ]
+    if [ "$procs" -lt 4 ]
     then
         hostSafe=$(( procs / 2 ))
     else
@@ -356,7 +360,7 @@ dockbasher()
 
     if [ $# -ne 1 ]
     then
-        printf "Please provide the container instance ID.\\n" 1>&2
+        _error "Please provide the container instance ID."
         return 1
     fi
 
@@ -370,17 +374,20 @@ dockbasher()
 
 
 ##
-# Kill all "empty" tmux sessions.
-tka()
+# Clear all containers and unused images. Useful after you've just tested a Dockerfile build a bunch of times.
+clear_containers()
 {
-    local location="/home/brandon/.tmux/session"
+    # Clear containers.
+    for c in $(docker ps -a | awk '{ print $1 }' | tail -n +2)
+    do
+        docker rm "$c"
+    done
 
-    # shellcheck disable=SC2046
-    echo $(tmux display-message -p '#S') > "$location"
-
-    ts
-
-    tk "$(cat "$location")"
+    # Clear images.
+    for im in $(docker images | awk '{ print $3 }' | tail -n +2)
+    do
+        docker rmi "$im"
+    done
 
     return 0
 }
@@ -391,7 +398,7 @@ tka()
 vv() {
     if [ $# -ne 2 ]
     then
-        printf "Please provide an IP / host name followed by VM name\\n" 1>&2
+        _error "Please provide an IP / host name followed by VM name."
         return 1
     fi
 
@@ -400,26 +407,6 @@ vv() {
 
     virt-viewer -c "qemu+ssh://$host/system" "$VM" &
     disown
-
-    return 0
-}
-
-
-##
-# Clear all containers and unused images. Useful after you've just tested a Dockerfile build a bunch of times.
-clear_containers()
-{
-    # Clear containers.
-    for c in $(docker ps -a | awk '{ print $1 }' | tail -n +2)
-    do 
-        docker rm "$c"
-    done
-
-    # Clear images.
-    for im in $(docker images | awk '{ print $3 }' | tail -n +2)
-    do 
-        docker rmi "$im"
-    done
 
     return 0
 }
