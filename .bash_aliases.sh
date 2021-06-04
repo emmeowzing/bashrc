@@ -28,13 +28,14 @@ alias gb='git branch'
 alias gc='git commit'
 alias gcm='git checkout master'
 alias gr='git remote'
+alias gl='git log --graph --oneline --all'
 
 # Virsh
 alias va='virsh list --all'
 alias ve='virsh edit'
 alias vb='virsh domblklist --details'
 
-# tmux (cf. ``
+# tmux
 alias ta='tmux attach -t'
 #alias ts='tmux switch -t'
 alias tl='tmux ls'
@@ -42,6 +43,11 @@ alias tk='tmux kill-session -t'
 alias tmshow="tmux display-message -p '#S'"
 alias tn='tmux new -s'
 alias td='tmux detach'
+
+# Docker
+alias dp='docker ps'
+alias dpa='docker ps -a'
+alias di='docker images'
 
 # Random utilities
 alias lsblkl='lsblk | grep -v loop'
