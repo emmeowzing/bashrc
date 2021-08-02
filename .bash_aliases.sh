@@ -49,6 +49,9 @@ alias dp='docker ps'
 alias dpa='docker ps -a'
 alias di='docker images'
 
+# K8s
+alias k='kubectl'
+
 # Random utilities
 alias lsblkl='lsblk | grep -v loop'
 alias pbcopy='xclip -selection clipboard'
