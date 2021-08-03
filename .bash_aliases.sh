@@ -51,6 +51,7 @@ alias di='docker images'
 
 # K8s
 alias k='kubectl'
+alias ds='devspace'
 
 # Random utilities
 alias lsblkl='lsblk | grep -v loop'
