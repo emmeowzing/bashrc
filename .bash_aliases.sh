@@ -52,6 +52,7 @@ alias di='docker images'
 # K8s
 alias k='kubectl'
 alias ds='devspace'
+alias ctx='kubectl ctx'
 
 # Random utilities
 alias lsblkl='lsblk | grep -v loop'
@@ -59,3 +60,6 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias nmap='nmap --reason'
 alias shellcheck='shellcheck -x'
+
+# AWS CLI
+alias aws_rotate='aws-vault rotate --no-session --debug'
