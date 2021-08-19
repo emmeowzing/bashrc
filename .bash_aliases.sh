@@ -27,7 +27,7 @@ alias gs='git status'
 alias gb='git branch'
 alias gc='git commit'
 alias gcm='git checkout master'
-alias gr='git remote'
+alias gr='git remote -v'
 alias gl='git log --graph --oneline --all'
 
 # Virsh
