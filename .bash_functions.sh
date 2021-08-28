@@ -380,13 +380,13 @@ clear_containers()
     # Clear containers.
     for c in $(docker ps -a | awk '{ print $1 }' | tail -n +2)
     do
-        docker rm "$c"
+        sudo docker rm "$c"
     done
 
     # Clear images.
     for im in $(docker images | awk '{ print $3 }' | tail -n +2)
     do
-        docker rmi "$im"
+        sudo docker rmi "$im"
     done
 
     return 0
