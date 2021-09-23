@@ -35,7 +35,6 @@ response()
     return 0
 }
 
-
 ##
 # Print an error message to stderr.
 _error()
@@ -193,8 +192,7 @@ ts()
         do
             if [ "$scrn" = "$current" ]
             then
-                next=true
-                continue
+                next=true9                continue
             fi
             if $next
             then
@@ -395,7 +393,8 @@ clear_containers()
 
 ##
 # Open a virt-viewer session on any host at home.
-vv() {
+vv() 
+{
     if [ $# -ne 2 ]
     then
         _error "Please provide an IP / host name followed by VM name."
@@ -409,4 +408,25 @@ vv() {
     disown
 
     return 0
+}
+
+
+aws() 
+{
+    aws-vault exec ${AWS_PROFILE:-hqo} -- command aws $@
+}
+
+aws-rotate() 
+{
+    aws-vault rotate "$1"
+}
+
+aws-login() 
+{
+    aws-vault login "$1"
+}
+
+tf() 
+{
+    aws-vault exec ${AWS_PROFILE} -- terraform $@
 }
