@@ -28,6 +28,7 @@ alias gs='git status && git diff'
 alias gb='git branch'
 alias gc='git commit'
 alias gcm='git checkout master'
+alias gmm='git merge master'
 alias gr='git remote -v'
 alias gl='git log --graph --oneline --all'
 
