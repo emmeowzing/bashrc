@@ -5,7 +5,7 @@ alias zs='zpool status -vP'
 alias zi='zpool iostat -vP'
 alias ht='htop'
 
-alias a='zl; zs; zi; va; vmproccount'
+alias a='zl; zs; zi; va; vmproccount; nvidia-smi'
 
 # ls
 alias lll='ls -las'
@@ -27,6 +27,7 @@ alias ga='git add .'
 alias gs='git status && git diff'
 alias gb='git branch'
 alias gc='git commit'
+alias gcp='git add . && git commit && git push'
 alias gcm='git checkout master'
 alias gr='git remote -v'
 alias gl='git log --graph --oneline --all'
