@@ -29,6 +29,7 @@ alias gb='git branch'
 alias gc='git commit'
 alias gcp='git add . && git commit && git push'
 alias gcm='git checkout master'
+alias gmm='git merge master'
 alias gr='git remote -v'
 alias gl='git log --graph --oneline --all'
 
