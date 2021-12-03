@@ -66,3 +66,7 @@ alias shellcheck='shellcheck -x'
 
 # AWS CLI
 alias aws_rotate='aws-vault rotate --no-session --debug'
+
+# CircleCI
+ci='circleci'
+cio='circleci orb'
