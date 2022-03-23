@@ -415,7 +415,7 @@ vv()
 # AWS helper commands
 aws() 
 {
-    aws-vault exec ${AWS_PROFILE} -- command aws $@
+    aws-vault exec "${AWS_PROFILE}" -- command aws $@
 }
 
 aws-rotate() 
@@ -430,5 +430,5 @@ aws-login()
 
 tf() 
 {
-    aws-vault exec ${AWS_PROFILE} -- terraform $@
+    aws-vault exec "${AWS_PROFILE}" -- terraform $@
 }
