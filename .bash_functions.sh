@@ -411,9 +411,11 @@ vv()
 }
 
 
+##
+# AWS helper commands
 aws() 
 {
-    aws-vault exec ${AWS_PROFILE:-hqo} -- command aws $@
+    aws-vault exec ${AWS_PROFILE} -- command aws $@
 }
 
 aws-rotate() 

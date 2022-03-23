@@ -56,6 +56,7 @@ alias di='docker images'
 alias k='kubectl'
 alias ds='devspace'
 alias ctx='kubectl ctx'
+alias helmsearch='helm search repo' # <repo> to list chart versions available in a repo
 
 # Random utilities
 alias lsblkl='lsblk | grep -v loop'
