@@ -18,4 +18,4 @@ and, finally,
 ```shell script
 printf "source ~/.bash_functions\\n" >> ~/.bashrc
 ```
-so that it may be referenced (`.bash_aliases` is automatically loaded), and updates captured over the links.
+so that it may be referenced (`.bash_aliases` is automatically loaded), and updates captured over the links. Or, simply run `./link.sh`.
