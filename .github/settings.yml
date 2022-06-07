@@ -1,0 +1,7 @@
+_extends: .github
+
+repository:
+  name: bashrc
+  description: Personal functions and aliases I reference in my .zshrc and .bashrc 
+  homepage: https://github.com/bjd2385/bashrc
+  topics: bash
