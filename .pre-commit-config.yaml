@@ -6,4 +6,4 @@ repos:
         args:
           - .bash_aliases.sh
           - .bash_functions.sh
-          - '*'
+          - link.sh
