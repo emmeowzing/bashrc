@@ -73,21 +73,14 @@ _warning()
 # Drop a .gitignore in my cwd with the most common files I try not to include.
 gitignore()
 {
-    touch .gitignore
-    local 
-    
-    files=(
-        ".git/"
-        ".env"
-        ".idea/"
-        ".terraform/"
-        "venv/"
-    )
+    _join_by() {
+        local d=${1-} f=${2-}
+        if shift 2; then
+            printf %s "$f" "${@/#/$d}"
+        fi
+    }
 
-    for f in "${files[@]}"
-    do
-        printf "%s\\n" "$f" >> .gitignore
-    done
+    curl -ssL "https://www.toptal.com/developers/gitignore/api/$(_join_by "," "$@")" > .gitignore
 
     return 0
 }
