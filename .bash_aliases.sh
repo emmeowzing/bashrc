@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # ZFS
 alias zl='zfs list -o name,creation,refer,available,mountpoint,mounted,origin'
 alias zlt='zfs list -t all -ro name,creation,written,clones'
@@ -27,6 +29,7 @@ alias ga='git add .'
 alias gs='git status && git diff'
 alias gb='git branch'
 alias gc='git commit'
+alias gp='git push'
 alias gcp='git add . && git commit && git push'
 alias gcm='git checkout master'
 alias gmm='git merge master'
@@ -70,5 +73,5 @@ alias shellcheck='shellcheck -x'
 alias aws_rotate='aws-vault rotate --no-session --debug'
 
 # CircleCI
-ci='circleci'
-cio='circleci orb'
+alias ci='circleci'
+alias cio='circleci orb'
