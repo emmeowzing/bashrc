@@ -5,7 +5,7 @@ alias zs='zpool status -vP'
 alias zi='zpool iostat -vP'
 alias ht='htop'
 
-alias a='zl; zs; zi; va; vmproccount; nvidia-smi'
+alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status'
 
 # ls
 alias lll='ls -las'
@@ -32,6 +32,7 @@ alias gcm='git checkout master'
 alias gmm='git merge master'
 alias gr='git remote -v'
 alias gl='git log --graph --oneline --all'
+alias gt='git tag'
 
 # Virsh
 alias va='virsh list --all'
