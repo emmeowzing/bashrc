@@ -43,6 +43,7 @@ workflows:
     jobs:
       - generate-release:
           name: Generate release from tag
+          context: github
           filters:
             branches:
               ignore: /.*/
