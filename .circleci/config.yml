@@ -5,6 +5,9 @@ executors:
     docker:
       - image: cimg/base:stable
 
+orbs:
+  shellcheck: circleci/shellcheck@3.1.1
+
 jobs:
   generate-release:
     executor: default
@@ -29,6 +32,12 @@ jobs:
 
 workflows:
   version: 2
+
+  on-commit:
+    jobs:
+      - shellcheck/check:
+          dir: .
+          exclude: SC2148
 
   on-tag:
     jobs:
