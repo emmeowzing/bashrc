@@ -165,12 +165,10 @@ exportConda()
 # shellcheck disable=SC2120
 ts()
 {
-    if [ $# -gt 1 ]
-    then
+    if [ $# -gt 1 ]; then
         _error "Only accepts 0 or 1 arguments, received $#"
         return 1
-    elif [ $# -eq 1 ]
-    then
+    elif [ $# -eq 1 ]; then
         tmux switch -t "$1"
     else
         local current next screens
@@ -182,14 +180,13 @@ ts()
         next=false
 
         # shellcheck disable=SC2068
-        for scrn in ${screens[@]}
-        do
-            if [ "$scrn" = "$current" ]
-            then
-                next=true9                continue
+        for scrn in ${screens[@]}; do
+            if [ "$scrn" = "$current" ]; then
+                next=true
+                continue
             fi
-            if $next
-            then
+
+            if $next; then
                 tmux switch -t "$scrn"
                 return 0
             fi
@@ -206,12 +203,10 @@ ts()
 # exact function body, just backward loop.
 st()
 {
-    if [ $# -gt 1 ]
-    then
+    if [ $# -gt 1 ]; then
         _error "Only accepts 0 or 1 arguments, received $#"
         return 1
-    elif [ $# -eq 1 ]
-    then
+    elif [ $# -eq 1 ]; then
         # Either ts or st may be used to switch to a specific screen name.
         tmux switch -t "$1"
     else
@@ -225,16 +220,14 @@ st()
         screens=( ${screens[-1]} ${screens[@]} )
         former=false
         
-        for ((i=${#screens[@]}-1; i>=0; --i))
-        do
+        for ((i=${#screens[@]}-1; i>=0; --i)); do
             scrn="${screens[i]}"
-            if [ "$scrn" = "$current" ]
-            then
+            if [ "$scrn" = "$current" ]; then
                 former=true
                 continue
             fi
-            if $former
-            then
+
+            if $former; then
                 tmux switch -t "$scrn"
                 return 0
             fi
@@ -249,8 +242,7 @@ st()
 # Allocate a raw disk for VMs of some specified size in GiB.
 allocate()
 {
-    if [ $# -ne 2 ]
-    then
+    if [ $# -ne 2 ]; then
         _error "** Please provide a disk size (in GiB) and path to file."
         return 1
     fi
