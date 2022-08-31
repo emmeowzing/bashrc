@@ -65,6 +65,7 @@ alias ctx='kubectl ctx' # krew plugins
 alias ns='kubectl ns'
 alias helmsearch='helm search repo' # <repo> to list chart versions available in a repo
 alias hru='helm repo update'
+alias h='helm'
 
 # Random utilities
 alias lsblkl='lsblk | grep -v loop'
