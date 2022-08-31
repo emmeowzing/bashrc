@@ -10,7 +10,7 @@ alias ht='htop'
 alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status'
 
 # ls
-alias lll='ls -las'
+alias lll='ls -lash'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -61,8 +61,10 @@ alias di='docker images'
 # K8s
 alias k='kubectl'
 alias ds='devspace'
-alias ctx='kubectl ctx'
+alias ctx='kubectl ctx' # krew plugins
+alias ns='kubectl ns'
 alias helmsearch='helm search repo' # <repo> to list chart versions available in a repo
+alias hru='helm repo update'
 
 # Random utilities
 alias lsblkl='lsblk | grep -v loop'
@@ -75,5 +77,5 @@ alias shellcheck='shellcheck -x'
 alias aws_rotate='aws-vault rotate --no-session --debug'
 
 # CircleCI
-alias ci='circleci'
-alias cio='circleci orb'
+alias cci='circleci'
+alias cco='circleci orb'
