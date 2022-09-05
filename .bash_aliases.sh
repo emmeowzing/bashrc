@@ -1,10 +1,13 @@
 #! /bin/bash
 
+alias watch='watch '
+
 # ZFS
 alias zl='zfs list -o name,creation,refer,available,mountpoint,mounted,origin'
 alias zlt='zfs list -t all -ro name,creation,written,clones'
 alias zs='zpool status -vP'
 alias zi='zpool iostat -vP'
+alias htop='htop --tree'
 alias ht='htop'
 
 alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status'
