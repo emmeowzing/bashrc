@@ -1,6 +1,16 @@
 #! /bin/bash
 
 alias watch='watch '
+alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status'
+alias c='clear'
+alias untar='tar -zxvf'
+
+# Jump Down
+alias 1d='cd ..'
+alias 2d='1d && 1d'
+alias 3d='1d && 2d'
+alias 4d='1d && 3d'
+alias 5d='1d && 4d'
 
 # ZFS
 alias zl='zfs list -o name,creation,refer,available,mountpoint,mounted,origin'
@@ -9,8 +19,6 @@ alias zs='zpool status -vP'
 alias zi='zpool iostat -vP'
 alias htop='htop --tree'
 alias ht='htop'
-
-alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status'
 
 # ls
 alias lll='ls -lash'
