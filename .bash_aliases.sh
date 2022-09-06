@@ -50,6 +50,16 @@ alias gr='git remote -v'
 alias gl='git log --graph --oneline --all'
 alias gt='git tag'
 
+##
+# Pull latest source branch's changes from remote (e.g. develop or master) and merge them into the current branch.
+function gpm()
+{
+    local SOURCE="${1:-develop}"
+    local CURRENT="$(git branch --show-current)"
+
+    git checkout "$SOURCE" || (git stash drop && git stash && git checkout "$SOURCE") && git pull && git checkout "$CURRENT" && git merge "$SOURCE" && git stash apply
+}
+
 # Virsh
 alias va='virsh list --all'
 alias ve='virsh edit'
