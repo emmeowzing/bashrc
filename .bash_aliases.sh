@@ -54,8 +54,9 @@ alias gt='git tag'
 # Pull latest source branch's changes from remote (e.g. develop or master) and merge them into the current branch.
 function gpm()
 {
-    local SOURCE="${1:-develop}"
-    local CURRENT="$(git branch --show-current)"
+    local SOURCE CURRENT
+    SOURCE="${1:-develop}"
+    CURRENT="$(git branch --show-current)"
 
     git checkout "$SOURCE" || (git stash drop && git stash && git checkout "$SOURCE") && git pull && git checkout "$CURRENT" && git merge "$SOURCE" && git stash apply
 }
@@ -88,6 +89,7 @@ alias helmsearch='helm search repo' # <repo> to list chart versions available in
 alias hru='helm repo update'
 alias hdu='helm dependency update'
 alias h='helm'
+alias kge='kubectl get events --sort-by=".metadata.creationTimestamp"'
 
 # Random utilities
 alias lsblkl='lsblk | grep -v loop'
