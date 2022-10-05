@@ -4,6 +4,7 @@ alias watch='watch '
 alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status'
 alias c='clear'
 alias untar='tar -zxvf'
+alias tts='find . -type f -name "*.sh" -exec sed -i "s/\t/    /g" {} \;'
 
 # Jump Down
 alias 1d='cd ..'

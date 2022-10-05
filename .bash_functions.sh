@@ -247,11 +247,44 @@ allocate()
         return 1
     fi
 
+    local size disk
+
     size="$1"
     disk="$2"
 
     sudo dd if=/dev/zero of="$disk" seek="${size}G" count=0 bs=1
     ll "$disk"
+
+    return 0
+}
+
+
+##
+# Resize VM disk images by some amount in GiB.
+resize()
+{
+    if [ $# -ne 2 ]; then
+        _error "** Please provide a disk size modifier (in GiB, e.g., \"+10G\" or \"-10G\") and path to file."
+        return 1
+    fi
+
+    local size disk modifier format
+
+    size="$1"
+    disk="$2"
+    modifier="${disk:0:1}"
+    format="${disk##*.}"
+
+    if [ "$modifier" != "-" ] && [ "$modifier" != "+" ]; then
+        _error "** Disk size must include prefix modifier +/-."
+        return 1
+    fi
+    
+    if [ "$modifier" = "-" ]; then
+        qemu-img resize "$disk" -f "$format" --shrink "$size"
+    else
+        qemu-img resize "$disk" -f "$format" "$size"
+    fi
 
     return 0
 }
@@ -362,13 +395,13 @@ dockbasher()
 clear_containers()
 {
     # Clear containers.
-    for c in $(docker ps -a | awk '{ print $1 }' | tail -n +2)
+    for c in $(sudo docker ps -a | awk '{ print $1 }' | tail -n +2)
     do
         sudo docker rm "$c"
     done
 
     # Clear images.
-    for im in $(docker images | awk '{ print $3 }' | tail -n +2)
+    for im in $(sudo docker images | awk '{ print $3 }' | tail -n +2)
     do
         sudo docker rmi "$im"
     done
