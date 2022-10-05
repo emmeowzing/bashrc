@@ -90,7 +90,7 @@ alias helmsearch='helm search repo' # <repo> to list chart versions available in
 alias hru='helm repo update'
 alias hdu='helm dependency update'
 alias h='helm'
-alias kge='kubectl get events --sort-by=".metadata.creationTimestamp"'
+alias kge='kubectl get events --sort-by=".lastTimestamp"'
 
 # Random utilities
 alias lsblkl='lsblk | grep -v loop'
