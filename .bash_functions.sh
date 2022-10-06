@@ -291,6 +291,28 @@ resize()
 
 
 ##
+# Switch rancher cluster contexts.
+rancher_cluster()
+{
+    if [ $# -ne 1 ]; then
+        _error "** Please provide a cluster name."
+        return 1
+    fi
+
+    local cluster="$1"
+
+    if [ ! -d "$HOME/.kube" ]; then
+        mkdir "$HOME/.kube"
+    fi
+
+    rancher clusters kf "$cluster" > "$HOME/.kube/config"
+    export KUBECONFIG="$HOME"/.kube/config
+
+    return 0
+}
+
+
+##
 # Reboot a remote system (gracefully).
 rbr()
 {
