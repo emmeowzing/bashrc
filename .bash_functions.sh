@@ -433,6 +433,17 @@ clear_containers()
 
 
 ##
+# Authenticate to GCR with Docker.
+gauth_docker()
+{
+    gcloud auth login
+    gcloud auth configure-docker
+
+    return 0
+}
+
+
+##
 # Open a virt-viewer session on any host at home.
 vv() 
 {
