@@ -88,6 +88,41 @@ gitignore()
 
 
 ##
+# Drop a default .circleci/config.yml structure with setup workflows enabled.
+circle()
+{
+    if [ ! -d .circleci/ ]; then
+        mkdir .circleci
+    fi
+
+    if [ ! -f .circleci/config.yml ]; then
+        cat > .circleci/config.yml << CIRCLE
+version: 2.1
+
+setup: true
+
+
+executors: {}
+
+
+orbs: {}
+
+
+commands: {}
+
+
+jobs: {}
+
+
+workflows: {}
+CIRCLE
+    fi
+
+    return 0
+}
+
+
+##
 # Run mypy / type checker before executing a program.
 py()
 {
