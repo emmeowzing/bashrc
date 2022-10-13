@@ -99,7 +99,8 @@ alias kd='kubectl drain --ignore-daemonsets'
 alias ctx='kubectl ctx' # krew plugins
 alias ns='kubectl ns'
 alias kge='kubectl get events --sort-by=".lastTimestamp"'
-alias kgp='kubectl get nodes -o wide'
+alias kgp='kubectl get pods -o wide'
+alias kgn='kubectl get nodes -o wide'
 # Get all pods on a particular node in the cluster.
 function kgpn()
 {
