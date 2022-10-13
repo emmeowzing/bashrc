@@ -9,7 +9,7 @@ alias untar='tar -zxvf'
 # Change tabs to spaces on a particular file extension recursively, starting in the current directory.
 function tts()
 {
-    if [ $# -ne 2 ]; then
+    if [ $# -ne 1 ]; then
         _error "Expected at least 1 argument, file extension (e.g. txt, sh, or tf)"
         return 1
     fi
@@ -95,14 +95,15 @@ alias di='docker images'
 # K8s
 alias k='kubectl'
 alias ke='kubectl edit'
-alias ds='devspace'
+alias kd='kubectl drain'
 alias ctx='kubectl ctx' # krew plugins
 alias ns='kubectl ns'
 alias kge='kubectl get events --sort-by=".lastTimestamp"'
 alias kgp='kubectl get nodes -o wide'
+# Get all pods on a particular node in the cluster.
 function kgpn()
 {
-    if [ $# -ne 2 ]; then
+    if [ $# -ne 1 ]; then
         _error "Expected at least 1 argument, cluster node name (k get nodes)"
         return 1
     fi
@@ -115,6 +116,7 @@ alias hsr='helm search repo' # <repo> to list chart versions available in a repo
 alias hru='helm repo update'
 alias hdu='helm dependency update'
 alias h='helm'
+alias ds='devspace'
 
 # Random utilities
 alias lsblkl='lsblk | grep -v loop'
