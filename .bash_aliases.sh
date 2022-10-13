@@ -95,7 +95,7 @@ alias di='docker images'
 # K8s
 alias k='kubectl'
 alias ke='kubectl edit'
-alias kd='kubectl drain'
+alias kd='kubectl drain --ignore-daemonsets'
 alias ctx='kubectl ctx' # krew plugins
 alias ns='kubectl ns'
 alias kge='kubectl get events --sort-by=".lastTimestamp"'
