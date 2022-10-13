@@ -4,7 +4,17 @@ alias watch='watch '
 alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status'
 alias c='clear'
 alias untar='tar -zxvf'
-alias tts='find . -type f -name "*.sh" -exec sed -i "s/\t/    /g" {} \;'
+function tts()
+{
+    if [ $# -ne 2 ]; then
+        _error "Expected at least 1 argument, file extension (e.g. txt, sh, or tf)"
+        return 1
+    fi
+
+    local ext="$1"
+
+    find . -type f -name "*.$ext" -exec printf "Changing tabs to spaces in %s\\n" {}\; -exec sed -i "s/\t/    /g" {} \;
+}
 
 # Jump Down
 alias 1d='cd ..'
