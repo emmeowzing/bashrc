@@ -50,8 +50,6 @@ alias gmd='git merge develop'
 alias gr='git remote -v'
 alias gl='git log --graph --oneline --all'
 alias gt='git tag'
-
-##
 # Pull latest source branch's changes from remote (e.g. develop or master) and merge them into the current branch.
 function gpm()
 {
@@ -83,14 +81,27 @@ alias di='docker images'
 
 # K8s
 alias k='kubectl'
+alias ke='kubectl edit'
 alias ds='devspace'
 alias ctx='kubectl ctx' # krew plugins
 alias ns='kubectl ns'
-alias helmsearch='helm search repo' # <repo> to list chart versions available in a repo
+alias kge='kubectl get events --sort-by=".lastTimestamp"'
+alias kgp='kubectl get nodes -o wide'
+function kgpn()
+{
+    if [ $# -ne 2 ]; then
+        _error "Expected at least 1 argument, cluster node name (k get nodes)"
+        return 1
+    fi
+
+    local node="$1"
+
+    kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName="$node"
+}
+alias hsr='helm search repo' # <repo> to list chart versions available in a repo
 alias hru='helm repo update'
 alias hdu='helm dependency update'
 alias h='helm'
-alias kge='kubectl get events --sort-by=".lastTimestamp"'
 
 # Random utilities
 alias lsblkl='lsblk | grep -v loop'
