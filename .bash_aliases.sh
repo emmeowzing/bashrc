@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 # Bash aliases and alias-like function shortcuts.
 
-# 
+# Not really an alias, but alias-like. Allows you to run `git exec ...some command at the root of your repo...`
 git config --global alias.exec '!exec '
 
 alias watch='watch '
