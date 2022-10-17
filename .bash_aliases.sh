@@ -63,7 +63,7 @@ function gc()
 
     git commit --allow-empty
 }
-alias gp='git push'
+alias gp='git push -u origin $(git branch --show-current)'
 alias gcp='ga && gc && gp'
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
