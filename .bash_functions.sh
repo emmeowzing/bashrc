@@ -1,4 +1,5 @@
-#! /bin/bash
+#! /usr/bin/env bash
+# Bash functions.
 
 ##
 # Get a user's response on a question to set environment variables.

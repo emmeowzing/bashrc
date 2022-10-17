@@ -1,4 +1,8 @@
-#! /bin/bash
+#! /usr/bin/env bash
+# Bash aliases and alias-like function shortcuts.
+
+# 
+git config --global alias.exec '!exec '
 
 alias watch='watch '
 alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status'
