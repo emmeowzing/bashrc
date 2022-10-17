@@ -134,7 +134,7 @@ function kgpn()
 
     local node="$1"
 
-    kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName="$node"
+    kubectl get pods -A -o wide --field-selector spec.nodeName="$node"
 }
 alias hsr='helm search repo' # <repo> to list chart versions available in a repo
 alias hru='helm repo update'
