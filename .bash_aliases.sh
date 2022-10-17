@@ -21,7 +21,7 @@ function tts()
 
     local ext="$1"
 
-    find . -type f -name "*.$ext" -exec printf "Changing tabs to spaces in %s\\n" {}\; -exec sed -i "s/\t/    /g" {} \;
+    find . -type f -name "*.$ext" -exec printf "Changing tabs to spaces in %s\\n" {} \; -exec sed -i "s/\t/    /g" {} \;
 }
 
 # Jump Down
