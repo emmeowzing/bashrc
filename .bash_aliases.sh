@@ -63,7 +63,17 @@ function gc()
 
     git commit --allow-empty
 }
-alias gp='git push -u origin $(git branch --show-current)'
+# If there is more than one remote, fzf-it-up.
+function gp()
+{
+    if [ "$(git remote | wc -l)" -eq 0 ]; then
+        _error "Must set git repository remote"
+    elif [ "$(git remote | wc -l)" -gt 1  ]; then
+        git push -u "$(git remote | fzf)" "$(git branch --show-current)"
+    else
+        git push -u "$(git remote)" "$(git branch --show-current)"
+    fi
+}
 alias gcp='ga && gc && gp'
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
