@@ -53,9 +53,17 @@ alias gi='git init .'
 alias ga='git add .'
 alias gs='git status && git diff'
 alias gb='git branch'
-alias gc='git commit'
+# If .pre-commit-config.yaml exists, pre-commit install.
+function gc()
+{
+    if [ -f .pre-commit-config.yaml ] && [ ! -f .git/hooks/pre-commit ]; then
+        pre-commit install
+    fi
+
+    git commit --allow-empty
+}
 alias gp='git push'
-alias gcp='git add . && git commit && git push'
+alias gcp='ga && gc && gp'
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
 alias gmm='git merge master'
