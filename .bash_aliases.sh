@@ -4,6 +4,7 @@ alias watch='watch '
 alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status'
 alias c='clear'
 alias untar='tar -zxvf'
+alias pcau='pre-commit auto-update'
 
 ##
 # Change tabs to spaces on a particular file extension recursively, starting in the current directory.

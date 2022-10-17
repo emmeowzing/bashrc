@@ -88,6 +88,35 @@ gitignore()
 
 
 ##
+# Dump my typical default pre-commit config in the current directory.
+precommit()
+{
+    cat << PRECOMMIT > .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: trailing-whitespace
+      - id: check-added-large-files
+        args: [--maxkb=10000, --enforce-all]
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: check-yaml
+      - id: mixed-line-ending
+      - id: pretty-format-json
+      - id: trailing-whitespace
+
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 3.0.0
+    hooks:
+      - id: shellcheck
+PRECOMMIT
+
+    pre-commit autoupdate
+}
+
+
+##
 # Drop a default .circleci/config.yml structure with setup workflows enabled.
 circle()
 {
