@@ -61,8 +61,11 @@ alias gb='git branch'
 # If .pre-commit-config.yaml exists, pre-commit install.
 function gc()
 {
-    if [ -f .pre-commit-config.yaml ] && [ ! -f .git/hooks/pre-commit ]; then
-        pre-commit install --allow-missing-config
+    # shellcheck disable=SC2155
+    local topLevel="$(git rev-parse --show-toplevel)"
+
+    if [ -f "$topLevel"/.pre-commit-config.yaml ] && [ ! -f "$topLevel"/.git/hooks/pre-commit ]; then
+        pre-commit install --allow-missing-config -c "$topLevel"/.pre-commit-config.yaml
     fi
 
     git commit --allow-empty
