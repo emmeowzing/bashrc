@@ -62,7 +62,7 @@ alias gb='git branch'
 function gc()
 {
     if [ -f .pre-commit-config.yaml ] && [ ! -f .git/hooks/pre-commit ]; then
-        pre-commit install
+        pre-commit install --allow-missing-config
     fi
 
     git commit --allow-empty
