@@ -123,6 +123,7 @@ alias di='docker images'
 alias k='kubectl'
 alias ke='kubectl edit'
 alias kd='kubectl drain --ignore-daemonsets'
+alias kdebug='kubectl debug -it --image busybox'
 alias ctx='kubectl ctx' # krew plugins
 alias ns='kubectl ns'
 alias kge='kubectl get events --sort-by=".lastTimestamp"'
@@ -140,10 +141,12 @@ function kgpn()
 
     kubectl get pods -A -o wide --field-selector spec.nodeName="$node"
 }
+
 alias hsr='helm search repo' # <repo> to list chart versions available in a repo
 alias hru='helm repo update'
 alias hdu='helm dependency update'
 alias h='helm'
+
 alias ds='devspace'
 
 # Random utilities
