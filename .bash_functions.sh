@@ -74,6 +74,11 @@ _warning()
 # Drop a .gitignore in my cwd with the most common files I try not to include.
 gitignore()
 {
+    if [ $# -lt 2 ]; then
+        touch .gitignore
+        return 0
+    fi
+
     # https://stackoverflow.com/a/17841619/3928184
     _join_by() {
         local d=${1-} f=${2-}
