@@ -152,7 +152,7 @@ alias h='helm'
 alias ds='devspace'
 
 # Random utilities
-alias lsblkl='lsblk | grep -v loop'
+alias lsblkl='lsblk -e7'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias nmap='nmap --reason'
