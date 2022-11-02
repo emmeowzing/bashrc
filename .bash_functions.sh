@@ -75,6 +75,7 @@ _warning()
 gitignore()
 {
     if [ $# -lt 2 ]; then
+        _warning "Didn't receive any arguments, creating empty .gitignore"
         touch .gitignore
         return 0
     fi
