@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 # Bash aliases and alias-like function shortcuts.
 
-# Not really an alias, but alias-like. Allows you to run `git exec ...some command at the root of your repo...`
+# Not really an alias, but alias-like. Allows you to run `git exec ...some command` at the root of your repo.
 git config --global alias.exec '!exec '
 
 alias watch='watch '
@@ -10,6 +10,7 @@ alias c='clear'
 alias untar='tar -zxvf'
 alias pcau='pre-commit auto-update'
 alias dig='dig +noall +answer'
+alias ncp='nc -zv'
 
 ##
 # Change tabs to spaces on a particular file extension recursively, starting in the current directory.
