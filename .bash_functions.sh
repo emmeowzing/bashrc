@@ -74,7 +74,7 @@ _warning()
 # Drop a .gitignore in my cwd with the most common files I try not to include.
 gitignore()
 {
-    if [ $# -lt 2 ]; then
+    if [ $# -eq 0 ]; then
         _warning "Didn't receive any arguments, creating empty .gitignore"
         touch .gitignore
         return 0
