@@ -555,3 +555,11 @@ tf()
 {
     aws-vault exec "${AWS_PROFILE}" -- terraform "$@"
 }
+
+
+##
+# Query the local arp cache for IPs and return them, sorted.
+subnetIPs()
+{
+    arp -n | tail -n +2 | sort -t . -k 1,1n -k 2,2n -k 2,2n -k 3,3n -k 4,4n | awk '{ print $1 }'
+}
