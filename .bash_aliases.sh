@@ -11,6 +11,7 @@ alias untar='tar -zxvf'
 alias pcau='pre-commit auto-update'
 alias dig='dig +noall +answer'
 alias ncp='nc -zv'
+alias base64='base64 -w 10000' # Never wrap columns of base64'ed-output.
 
 ##
 # Change tabs to spaces on a particular file extension recursively, starting in the current directory.
