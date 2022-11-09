@@ -130,6 +130,7 @@ alias ctx='kubectl ctx' # krew plugins
 alias ns='kubectl ns'
 alias kge='kubectl get events --sort-by=".lastTimestamp"'
 alias kgp='kubectl get pods -o wide'
+alias kga='kubectl get all'
 alias kgn='kubectl get nodes -o wide'
 alias kgns='kubectl get ns'
 alias kgdb='kubectl get pod,deploy,rs,sts,ds,svc,ingress,secret | less'
