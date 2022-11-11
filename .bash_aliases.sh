@@ -5,7 +5,7 @@
 git config --global alias.exec '!exec '
 
 alias watch='watch '
-alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status'
+alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status; atq'
 alias c='clear'
 alias untar='tar -zxvf'
 alias pcau='pre-commit auto-update'
@@ -130,6 +130,7 @@ alias ctx='kubectl ctx' # krew plugins
 alias ns='kubectl ns'
 alias kge='kubectl get events --sort-by=".lastTimestamp"'
 alias kgp='kubectl get pods -o wide'
+alias kgj='kubectl get jobs -o wide'
 alias kga='kubectl get all'
 alias kgn='kubectl get nodes -o wide'
 alias kgns='kubectl get ns'
