@@ -78,6 +78,7 @@ function gp()
 {
     if [ "$(git remote | wc -l)" -eq 0 ]; then
         _error "Must set git repository remote"
+        return 1
     elif [ "$(git remote | wc -l)" -gt 1  ]; then
         git push -u "$(git remote | fzf)" "$(git branch --show-current)"
     else
@@ -100,6 +101,36 @@ function gpm()
     CURRENT="$(git branch --show-current)"
 
     git checkout "$SOURCE" || (git stash drop && git stash && git checkout "$SOURCE") && git pull && git checkout "$CURRENT" && git merge "$SOURCE" && git stash apply
+}
+
+function gdt()
+{
+    if [ $# -ne 1 ]; then
+        _error "Must supply a tag name"
+        return 1
+    fi
+
+    local tag="$1"
+
+    git fetch --all --tags
+
+    if (gt | grep -iq "$tag"); then
+        _error "Tag ${tag} does not exist."
+        return 1
+    fi
+
+    # Delete the tag locally.
+    git tag -d "$tag"
+
+    # Delete the tag on some remote.
+    if [ "$(git remote | wc -l)" -eq 0 ]; then
+        _error "Must set git repository remote"
+        return 1
+    elif [ "$(git remote | wc -l)" -gt 1  ]; then
+        git push -u "$(git remote | fzf)" --delete "$tag"
+    else
+        git push -u "$(git remote)" --delete "$tag"
+    fi
 }
 
 # Virsh
