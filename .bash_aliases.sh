@@ -104,7 +104,7 @@ function gpm()
 
     git checkout "$SOURCE" || (git stash drop && git stash && git checkout "$SOURCE") && git pull && git checkout "$CURRENT" && git merge "$SOURCE" && git stash apply
 }
-
+# Delete git tag locally and remotely.
 function gdt()
 {
     if [ $# -ne 1 ]; then
