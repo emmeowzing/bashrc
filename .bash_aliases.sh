@@ -86,10 +86,12 @@ function gp()
     fi
 }
 alias gcp='ga && gc && gp'
-alias gcm='git checkout master'
-alias gcd='git checkout develop'
+alias gcm='git checkout master && git pull'
+alias gcd='git checkout develop && git pull'
 alias gmm='git merge master'
 alias gmd='git merge develop'
+alias grm='git rebase master'
+alias grd='git rebase develop'
 alias gr='git remote -v'
 alias gl='git log --graph --oneline --all'
 alias gt='git tag'
