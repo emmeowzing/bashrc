@@ -116,7 +116,7 @@ function gdt()
 
     git fetch --all --tags
 
-    if (gt | grep -iq "$tag"); then
+    if ! (gt | grep -iq "$tag"); then
         _error "Tag ${tag} does not exist."
         return 1
     fi
