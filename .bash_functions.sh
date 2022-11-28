@@ -19,7 +19,7 @@ response()
     question="$1"
     default="$2"
 
-    read -r -p "$question" var
+    read -r -p "$question (default: $default)" var
     if [ "$var" ]
     then
         printf "%s" "$var"
@@ -67,6 +67,22 @@ _warning()
     message="$1"
 
     printf "\e[2m\e[1mWARNING\e[0m\e[2m: %s\e[0m\\n" "$message" >&2
+}
+
+
+##
+# Print an informational message to stdout.
+_info()
+{
+    if [ $# -ne 1 ]; then
+        _error "Expected 1 argument to \`_info\`, received $#." >&2
+        exit 1
+    fi
+
+    local message
+    message="$1"
+
+    printf "%s\\n" "INFO: $message"
 }
 
 
