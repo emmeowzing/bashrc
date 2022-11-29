@@ -1,40 +1,91 @@
 #! /usr/bin/env bash
 # Bash functions.
 
+
 ##
 # Get a user's response on a question to set environment variables.
 # Call like `X="$(response "Enter your name: " "Emma")"`
 # To set a default value on `X` if the user just hits enter.
 response()
 {
-    if [ $# -eq 0 ]
-    then
+    if [ $# -eq 0 ]; then
         _error "Must submit at least 2 arguments to \`response\` function for IO."
-        return 1
-    elif [ $# -gt 2 ]
-    then
+        exit 1
+    elif [ $# -gt 2 ]; then
         _warning "received >2 arguments at response function, ignoring extra arguments"
     fi
 
     question="$1"
     default="$2"
 
-    read -r -p "$question (default: $default)" var
-    if [ "$var" ]
-    then
+    read -r -p "$question (default: \"$default\"): " var
+    if [ "$var" ]; then
         printf "%s" "$var"
     else
-        if [ "$default" ]
-        then
+        if [ "$default" ]; then
             _warning "Defaulting to $default"
         else
-            _warning "Attempted to default, but no value given, returning \"\""
+            _warning "Attempted to default, but no value given, returning empty \"\""
         fi
         printf "%s" "$default"
     fi
-
-    return 0
 }
+
+
+##
+# Get a user's private response on a question (such as a password) to set environment variables.
+response_private()
+{
+    if [ $# -eq 0 ]; then
+        _error "Must submit at least 1 arguments to response_private function for IO."
+        exit 1
+    elif [ $# -gt 1 ]; then
+        _warning "received >1 arguments at response_private function, ignoring extra arguments"
+    fi
+
+    question="$1"
+
+    while true; do
+        read -r -s -p "${question}: " var
+        if [ "$var" ]; then
+            printf "%s" "$var"
+            break
+        else
+            _error "Field cannot be blank."
+        fi
+    done
+}
+
+
+##
+# Get a user's yes or no response on a question.
+response_yn()
+{
+    if [ $# -eq 0 ]; then
+        _error "Must submit at least 1 arguments to response_yn function for IO."
+        exit 1
+    elif [ $# -gt 1 ]; then
+        _warning "received >1 arguments at response_yn function, ignoring extra arguments"
+    fi
+
+    question="$1"
+
+    while true; do
+        read -r -p "${question} (yes/no): " var
+
+        if [ -z "$var" ]; then
+            _error "Must pick one (yes/no)"
+            continue
+        fi
+
+        if [[ "$var" =~ ^[Yy].*$ ]]; then
+            return 0
+        fi
+
+        return 1
+    done
+}
+
 
 ##
 # Print an error message to stderr.
@@ -59,8 +110,8 @@ _warning()
 {
     if [ $# -ne 1 ]
     then
-        _error "Expected 1 argument to \`_warning\`, received $#.\\n"
-        return 1
+        _error "Expected 1 argument to \`_warning\`, received $#."
+        exit 1
     fi
 
     local message
@@ -82,7 +133,25 @@ _info()
     local message
     message="$1"
 
-    printf "%s\\n" "INFO: $message"
+    printf "\e[1mINFO:\e[0m %s\\n" "$message"
+}
+
+
+##
+# Check for required commands to run this script (prerequisites).
+dependencies()
+{
+    declare -A commands
+    local commands=(
+        [docker]="Must install Docker (https://docs.docker.com/engine/install/)"
+        [mapfile]="Upgrade bash version (brew install bash)"
+    )
+
+    for comm in "${!commands[@]}"; do
+        if ! command -v "$comm" >/dev/null; then
+            _error "Command \"$comm\" not found. (To install: ${commands[$comm]})"
+        fi
+    done
 }
 
 
