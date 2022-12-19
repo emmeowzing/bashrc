@@ -548,6 +548,43 @@ vmproccount()
 
 
 ##
+# Initialize a directory path with base Terraform module files.
+tfinit()
+{
+    if [ $# -ne 1 ]
+    then
+        _error "Please provide a path to the module's directory."
+        return 1
+    fi
+
+    local path="$1" fs f
+
+    fs=(
+        inputs.tf
+        outputs.tf
+        main.tf
+        providers.tf
+    )
+
+    for f in "${fs[@]}"; do
+        touch "$path"/"$f"
+
+        if [ "$f" = "providers.tf" ]; then
+            cat << EOF >> "$path"/"$f"
+terraform {
+  required_providers {
+    
+  }
+
+  required_version = "~> 1.3.6"
+}
+EOF
+        fi
+    done
+}
+
+
+##
 # Start a shell in a running Docker container.
 dockbasher()
 {
@@ -623,7 +660,7 @@ vv()
 # AWS helper commands
 aws() 
 {
-    aws-vault exec "${AWS_PROFILE}" -- command aws "$@"
+    aws-vault exec "${AWS_PROFILE}" -- aws "$@"
 }
 
 aws-rotate() 
