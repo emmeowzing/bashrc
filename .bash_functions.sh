@@ -563,13 +563,13 @@ tfinit()
         inputs.tf
         outputs.tf
         main.tf
-        providers.tf
+        terraform.tf
     )
 
     for f in "${fs[@]}"; do
         touch "$path"/"$f"
 
-        if [ "$f" = "providers.tf" ]; then
+        if [ "$f" = "terraform.tf" ]; then
             cat << EOF >> "$path"/"$f"
 terraform {
   required_providers {
