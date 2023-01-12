@@ -4,7 +4,7 @@
 # Not really an alias, but alias-like. Allows you to run `git exec ...some command` at the root of your repo.
 git config --global alias.exec '!exec '
 
-alias watch='watch '
+alias watch='watch -d '
 alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status; atq'
 alias c='clear'
 alias untar='tar -zxvf'
