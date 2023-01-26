@@ -205,7 +205,7 @@ repos:
     rev: v1.1.5
     hooks:
       - id: gitlabci-lint
-        # Expects env var like GITHUB_TOKEN="$(pass show github-token)".
+        # Expects env var like GITHUB_TOKEN=\"\$\(pass show github-token\)\".
         args:
           [
             -b, 'https://git.ops.sbe-vision.com',
