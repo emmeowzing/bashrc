@@ -193,15 +193,34 @@ repos:
         args: [--maxkb=10000, --enforce-all]
       - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable
-      - id: check-yaml
       - id: mixed-line-ending
-      - id: pretty-format-json
       - id: trailing-whitespace
 
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 3.0.0
     hooks:
       - id: shellcheck
+
+  - repo: https://github.com/bjd2385/pre-commit-gitlabci-lint
+    rev: v1.1.5
+    hooks:
+      - id: gitlabci-lint
+        # Expects env var like GITHUB_TOKEN="$(pass show github-token)".
+        args:
+          [
+            -b, 'https://git.ops.sbe-vision.com',
+            -c, .gitlab-ci.yml
+          ]
+
+  # Requires hadolint binary on local machine.
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint
+        args:
+          - --config
+          - .hadolint.yaml
+          - Dockerfile
 PRECOMMIT
 
     pre-commit autoupdate
