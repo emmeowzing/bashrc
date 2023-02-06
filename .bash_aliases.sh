@@ -188,6 +188,9 @@ alias h='helm'
 
 alias ds='devspace'
 
+alias dockercfg='k create secret generic --type=kubernetes.io/dockercfg --from-file=.dockercfg=$HOME/.docker/config.json dockercfg-secret --dry-run=client -o yaml'
+alias dockerconfigjson='k create secret generic --type=kubernetes.io/dockerconfigjson --from-file=.dockerconfigjson=$HOME/.docker/config.json dockercfg-secret --dry-run=client -o yaml'
+
 # Random utilities
 alias lsblkl='lsblk -e7'
 alias pbcopy='xclip -selection clipboard'
