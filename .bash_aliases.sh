@@ -11,7 +11,8 @@ alias untar='tar -zxvf'
 alias pcau='pre-commit auto-update'
 alias dig='dig +noall +answer'
 alias ncp='nc -zv'
-alias base64='base64 -w 10000' # Never wrap columns of base64'ed-output.
+alias base64='base64 -w0' # Never wrap columns of base64'ed-output.
+alias fdisk='sudo fdisk -l | sed -e "/Disk \/dev\/loop/,+5d"'
 
 ##
 # Change tabs to spaces on a particular file extension recursively, starting in the current directory.
