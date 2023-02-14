@@ -95,7 +95,16 @@ alias grm='git rebase master'
 alias grd='git rebase develop'
 alias gr='git remote -v'
 alias gl='git log --graph --oneline --all'
-alias gt='git tag'
+# shellcheck disable=SC2120
+function gt()
+{
+    if [ $# -eq 1 ]; then
+        VERSION="$1"
+        git tag "$VERSION" && git push origin "$VERSION"
+    else
+        git tag
+    fi
+}
 # Pull latest source branch's changes from remote (e.g. develop or master) and merge them into the current branch.
 function gpm()
 {
@@ -137,7 +146,16 @@ function gdt()
 }
 
 # Virsh
-alias va='virsh list --all'
+#alias va='virsh list --all'
+function va()
+{
+    if [ $# -lt 1 ]; then
+        virsh list --all
+    else
+        domain="$1"
+        virsh -c qemu+ssh://"$domain"/system list --all
+    fi
+}
 alias ve='virsh edit'
 alias vb='virsh domblklist --details'
 
