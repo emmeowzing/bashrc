@@ -185,22 +185,6 @@ precommit()
 {
     cat << PRECOMMIT > .pre-commit-config.yaml
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
-    hooks:
-      - id: trailing-whitespace
-      - id: check-added-large-files
-        args: [--maxkb=10000, --enforce-all]
-      - id: check-executables-have-shebangs
-      - id: check-shebang-scripts-are-executable
-      - id: mixed-line-ending
-      - id: trailing-whitespace
-
-  - repo: https://github.com/jumanjihouse/pre-commit-hooks
-    rev: 3.0.0
-    hooks:
-      - id: shellcheck
-
   - repo: https://github.com/bjd2385/pre-commit-gitlabci-lint
     rev: v1.1.5
     hooks:
@@ -221,6 +205,102 @@ repos:
           - --config
           - .hadolint.yaml
           - Dockerfile
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: check-added-large-files
+        args: [--maxkb=10000, --enforce-all]
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.991
+    hooks:
+      - id: mypy
+        args:
+          - --install-types
+          - --non-interactive
+          - --config-file=.mypy.ini
+
+  # - repo: https://github.com/mgedmin/check-manifest
+  #   rev: "0.48"
+  #   hooks:
+  #     - id: check-manifest
+  #       args:
+  #        - --ignore
+  #        - "*.json,*.txt,*.yaml,.mypy.ini,config/*.md,docker/*.sh,,examples/*,helm/*,package/*,scripts/*,service/*,tests/*,.circleci/*,.pylintrc,.tool-versions,docker/**/*,helm/**/*,examples/**/*"
+
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 3.0.0
+    hooks:
+      - id: shellcheck
+        args:
+          - -x
+
+  - repo: https://github.com/bjd2385/circleci-config-pre-commit-hook
+    rev: v1.1.2
+    hooks:
+      - id: circleci-config-validate
+
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint
+        args:
+          - docker/autoscaler/Dockerfile
+          - docker/influxdb/Dockerfile
+          - docker/mysql/Dockerfile
+          - --config
+          - .hadolint.yaml
+
+  # - repo: https://github.com/k-ogawa-1988/yamale-pre-commit
+  #   rev: v0.0.2
+  #   hooks:
+  #     - id: yamale-validate
+  #       args:
+  #         - conf/schema.yaml
+
+  - repo: https://github.com/gruntwork-io/pre-commit
+    rev: v0.1.17
+    hooks:
+      - id: helmlint
+
+  - repo: https://github.com/python-poetry/poetry
+    rev: 1.3.0
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
+      - id: poetry-export
+        args: ["-f", "requirements.txt", "-o", "requirements.txt"]
+
+  - repo: https://github.com/PyCQA/pylint
+    rev: v2.16.0b1
+    hooks:
+      - id: pylint
+        args:
+          - --rcfile=.pylintrc
+          - premiscale/
+
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.12.1
+    hooks:
+      - id: validate-pyproject
+
+  # - repo: https://github.com/charliermarsh/ruff-pre-commit
+  #   rev: v0.0.237
+  #   hooks:
+  #     - id: ruff
+  #       args: [--fix]
+  #       exclude: ^resources
+
+  - repo: https://github.com/premiscale/pre-commit-hooks
+    rev: v0.0.1
+    hooks:
+    -   id: msg-issue-prefix
 PRECOMMIT
 
     pre-commit autoupdate
