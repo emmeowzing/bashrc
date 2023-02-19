@@ -69,8 +69,7 @@ function gc()
     local topLevel="$(git rev-parse --show-toplevel)"
 
     if [ -f "$topLevel"/.pre-commit-config.yaml ] && { [ ! -f "$topLevel"/.git/hooks/pre-commit ] || [ ! -f "$topLevel"/.git/hooks/prepare-git-msg ]; }; then
-        pre-commit install --hook-type pre-commit --allow-missing-config -c "$topLevel"/.pre-commit-config.yaml
-        pre-commit install --hook-type prepare-commit-msg --allow-missing-config -c "$topLevel"/.pre-commit-config.yaml
+        pre-commit install --hook-type pre-commit --hook-type prepare-commit-msg --allow-missing-config -c "$topLevel"/.pre-commit-config.yaml
     fi
 
     git commit --allow-empty
