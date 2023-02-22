@@ -246,17 +246,6 @@ repos:
     hooks:
       - id: circleci-config-validate
 
-  - repo: https://github.com/hadolint/hadolint
-    rev: v2.12.0
-    hooks:
-      - id: hadolint
-        args:
-          - docker/autoscaler/Dockerfile
-          - docker/influxdb/Dockerfile
-          - docker/mysql/Dockerfile
-          - --config
-          - .hadolint.yaml
-
   # - repo: https://github.com/k-ogawa-1988/yamale-pre-commit
   #   rev: v0.0.2
   #   hooks:
@@ -336,34 +325,6 @@ jobs: {}
 
 workflows: {}
 CIRCLE
-    fi
-
-    return 0
-}
-
-
-##
-# Run mypy / type checker before executing a program.
-py()
-{
-    if [ $# -ne 1 ]
-    then
-        _error "Please provide a Python script."
-        return 1
-    fi
-
-    local program
-
-    program="$1"
-
-    # Requires shebang line on $program.
-    if [ -x "$program" ]
-    then
-        # Adding flake8 as that's yet another good checker.
-        flake8 "$program" # this does not return 0 upon completion :/
-        mypy "$program" && "$program"
-    else
-        printf "Please ensure the Python script is executable.\\n" 1>&2
     fi
 
     return 0
