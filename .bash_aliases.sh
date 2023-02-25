@@ -13,6 +13,7 @@ alias dig='dig +noall +answer'
 alias ncp='nc -zv'
 alias base64='base64 -w0' # Never wrap columns of base64'ed-output.
 alias fdisk='sudo fdisk -l | sed -e "/Disk \/dev\/loop/,+5d"'
+alias loop='losetup -fvP --show'
 
 ##
 # Change tabs to spaces on a particular file extension recursively, starting in the current directory.
