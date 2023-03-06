@@ -201,6 +201,22 @@ function kgpn()
     kubectl get pods -A -o wide --field-selector spec.nodeName="$node"
 }
 
+##
+# Copy a K8s secret from ns to another.
+kcopysecret()
+{
+    if [ $# -ne 3 ]; then
+        _error "Function \"kcopysecret\" expected 3 args: secret name, source ns, dest. ns"
+        exit 1
+    fi
+
+    local secret_name="$1"
+    local source_ns="$2"
+    local destination_ns="$3"
+
+    kubectl get secret "$secret_name" --namespace="$source_ns" -o yaml | sed "s/namespace: .*/namespace: ${destination_ns}/" | kubectl apply -f -
+}
+
 alias hsr='helm search repo' # <repo> to list chart versions available in a repo
 alias hru='helm repo update'
 alias hdu='helm dependency update'
