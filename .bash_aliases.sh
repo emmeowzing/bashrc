@@ -63,6 +63,8 @@ alias gi='git init .'
 alias ga='git add "$(git rev-parse --show-toplevel)"'
 alias gs='git status && git diff'
 alias gb='git branch'
+
+##
 # If .pre-commit-config.yaml exists, pre-commit install.
 function gc()
 {
@@ -75,6 +77,8 @@ function gc()
 
     git commit --allow-empty
 }
+
+##
 # If there is more than one remote, fzf-it-up.
 function gp()
 {
@@ -96,6 +100,8 @@ alias grm='git rebase master'
 alias grd='git rebase develop'
 alias gr='git remote -v'
 alias gl='git log --graph --oneline --all'
+
+##
 # shellcheck disable=SC2120
 function gt()
 {
@@ -106,6 +112,8 @@ function gt()
         git tag
     fi
 }
+
+##
 # Pull latest source branch's changes from remote (e.g. develop or master) and merge them into the current branch.
 function gpm()
 {
@@ -115,6 +123,8 @@ function gpm()
 
     git checkout "$SOURCE" || (git stash drop && git stash && git checkout "$SOURCE") && git pull && git checkout "$CURRENT" && git merge "$SOURCE" && git stash apply
 }
+
+##
 # Delete git tag locally and remotely.
 function gdt()
 {
@@ -146,6 +156,26 @@ function gdt()
     fi
 }
 
+##
+# Reset the current git branch against its source branch.
+function grb()
+{
+    if [ $# -ne 1 ]; then
+        _error "Function \"grb\" expected one argument: base branch name"
+        exit 1
+    fi
+
+    local current_branch
+    current_branch="$(git rev-parse --abbrev-ref HEAD)"
+    local target_branch="$1"
+
+    git stash
+    git checkout "$target_branch"
+    git branch -D "$current_branch"
+    git checkout -b "$current_branch"
+    git stash apply
+}
+
 # Virsh
 #alias va='virsh list --all'
 function va()
@@ -158,7 +188,7 @@ function va()
     fi
 }
 alias ve='virsh edit'
-alias vb='virsh domblklist --details'
+alias vdb='virsh domblklist --details'
 
 # tmux
 alias ta='tmux attach -t'
