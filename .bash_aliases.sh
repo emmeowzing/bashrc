@@ -169,6 +169,7 @@ function grb()
     current_branch="$(git rev-parse --abbrev-ref HEAD)"
     local target_branch="$1"
 
+    git stash drop
     git stash
     git checkout "$target_branch"
     git branch -D "$current_branch"
