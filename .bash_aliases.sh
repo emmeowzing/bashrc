@@ -162,7 +162,7 @@ function grb()
 {
     if [ $# -ne 1 ]; then
         _error "Function \"grb\" expected one argument: base branch name"
-        exit 1
+        return 1
     fi
 
     local current_branch
