@@ -238,7 +238,7 @@ kcopysecret()
 {
     if [ $# -ne 3 ]; then
         _error "Function \"kcopysecret\" expected 3 args: secret name, source ns, dest. ns"
-        exit 1
+        return 1
     fi
 
     local secret_name="$1"
