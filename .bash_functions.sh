@@ -184,6 +184,7 @@ gitignore()
 precommit()
 {
     cat << PRECOMMIT > .pre-commit-config.yaml
+fail_fast: true
 repos:
   - repo: https://github.com/bjd2385/pre-commit-gitlabci-lint
     rev: v1.1.5
@@ -357,8 +358,8 @@ screenb()
 # Alias the `reboot` command and require a user to use the full `/sbin/reboot`
 # in order to do so. I've done this before, and it messes up my VMs if they're
 # running and not saved.
-reboot() 
-{ 
+reboot()
+{
     _warning "Ignoring reboot command; please use \`/sbin/reboot\` if you truly wish to do this."
 
     return 1
@@ -435,7 +436,7 @@ st()
         # shellcheck disable=SC2206
         screens=( ${screens[-1]} ${screens[@]} )
         former=false
-        
+
         for ((i=${#screens[@]}-1; i>=0; --i)); do
             scrn="${screens[i]}"
             if [ "$scrn" = "$current" ]; then
@@ -495,7 +496,7 @@ resize()
         _error "** Disk size must include prefix modifier +/-."
         return 1
     fi
-    
+
     if [ "$modifier" = "-" ]; then
         qemu-img resize "$disk" -f "$format" --shrink "$size"
     else
@@ -600,7 +601,7 @@ vmproccount()
         printf "\\n\033[1m\033[92mTotal: %d\033[0m\\n\\n" "$cpuSum"
     else
         # Red
-        printf "\\n\033[1m\033[91mTotal: %d\033[0m\\n\\n" "$cpuSum"       
+        printf "\\n\033[1m\033[91mTotal: %d\033[0m\\n\\n" "$cpuSum"
     fi
 
     return 0
@@ -633,7 +634,7 @@ tfinit()
             cat << EOF >> "$path"/"$f"
 terraform {
   required_providers {
-    
+
   }
 
   required_version = "~> 1.3.6"
@@ -698,7 +699,7 @@ gauth_docker()
 
 ##
 # Open a virt-viewer session on any host at home.
-vv() 
+vv()
 {
     if [ $# -ne 2 ]
     then
@@ -718,22 +719,22 @@ vv()
 
 ##
 # AWS helper commands
-aws() 
+aws()
 {
     aws-vault exec "${AWS_PROFILE}" -- aws "$@"
 }
 
-aws-rotate() 
+aws-rotate()
 {
     aws-vault rotate "$1"
 }
 
-aws-login() 
+aws-login()
 {
     aws-vault login "$1"
 }
 
-tf() 
+tf()
 {
     aws-vault exec "${AWS_PROFILE}" -- terraform "$@"
 }
