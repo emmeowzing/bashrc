@@ -745,3 +745,18 @@ subnetIPs()
 {
     arp -n | tail -n +2 | sort -t . -k 1,1n -k 2,2n -k 2,2n -k 3,3n -k 4,4n | awk '{ print $1 }'
 }
+
+
+##
+# Change tabs to spaces on a particular file extension recursively, starting in the current directory.
+function tts()
+{
+    if [ $# -ne 1 ]; then
+        _error "Expected at least 1 argument, file extension (e.g. txt, sh, or tf)"
+        return 1
+    fi
+
+    local ext="$1"
+
+    find . -type f -name "*.$ext" -exec printf "Changing tabs to spaces in %s\\n" {} \; -exec sed -i "s/\t/    /g" {} \;
+}

@@ -15,20 +15,6 @@ alias base64='base64 -w0' # Never wrap columns of base64'ed-output.
 alias fdisk='sudo fdisk -l | sed -e "/Disk \/dev\/loop/,+5d"'
 alias loop='losetup -fvP --show'
 
-##
-# Change tabs to spaces on a particular file extension recursively, starting in the current directory.
-function tts()
-{
-    if [ $# -ne 1 ]; then
-        _error "Expected at least 1 argument, file extension (e.g. txt, sh, or tf)"
-        return 1
-    fi
-
-    local ext="$1"
-
-    find . -type f -name "*.$ext" -exec printf "Changing tabs to spaces in %s\\n" {} \; -exec sed -i "s/\t/    /g" {} \;
-}
-
 # Jump Down
 alias 1d='cd ..'
 alias 2d='1d && 1d'
@@ -226,6 +212,8 @@ alias kga='kubectl get all'
 alias kgn='kubectl get nodes -o wide'
 alias kgns='kubectl get ns'
 alias kgdb='kubectl get pod,deploy,rs,sts,ds,svc,ingress,secret | less'
+
+##
 # Get all pods on a particular node in the cluster.
 function kgpn()
 {
