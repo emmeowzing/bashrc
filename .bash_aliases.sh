@@ -60,9 +60,16 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Git
 alias g='git'
 alias gi='git init .'
-alias ga='git add "$(git rev-parse --show-toplevel)"'
 alias gs='git status && git diff'
-alias gb='git branch'
+alias ga='git add "$(git rev-parse --show-toplevel)"'
+
+##
+# Fuzzyfind git branch
+function gb()
+{
+    git checkout "$(git branch | fzf | xargs)"
+}
+
 
 ##
 # If .pre-commit-config.yaml exists, pre-commit install.
