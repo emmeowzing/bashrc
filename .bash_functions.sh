@@ -247,6 +247,11 @@ repos:
     hooks:
       - id: circleci-config-validate
 
+  - repo: https://github.com/bjd2385/circleci-orb-pre-commit-hook
+      rev: v1.3.2
+      hooks:
+        - id: circleci-orb-validate
+
   # - repo: https://github.com/k-ogawa-1988/yamale-pre-commit
   #   rev: v0.0.2
   #   hooks:
