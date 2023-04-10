@@ -53,7 +53,19 @@ alias ga='git add "$(git rev-parse --show-toplevel)"'
 # Fuzzyfind git branch
 function gb()
 {
-    git checkout "$(git branch | fzf | xargs)"
+    git pull --all && git fetch --all >/dev/null
+
+    branch="$(git branch -r | fzf | xargs)"
+
+    # TODO: Handle the multiple-remote case.
+    for remote in $(git remote); do
+        if [[ "$branch" =~ ^"$remote" ]]; then
+            git checkout -b "$(printf "%s" "$branch" | grep -oP "(?<=\/).*")" "$branch"
+            return 0
+        fi
+    done
+
+    git checkout "$branch"
 }
 
 
