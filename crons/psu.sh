@@ -3,6 +3,7 @@
 
 
 set -eo pipefail
+shopt -s nullglob
 
 
 running_vms()
@@ -10,6 +11,11 @@ running_vms()
     virsh list | tail -n +3 | head -n -1 | awk '{ print $2 }'
 }
 
+
+if ! pwrstat -status &>/dev/null; then
+    printf "pwrstat: permission denied\\n" >&2
+    exit 1
+fi
 
 if [ "$(pwrstat -status | grep -oP "Utility Power")" != "Utility Power" ]; then
     # Shutdown all running VMs.
