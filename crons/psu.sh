@@ -12,6 +12,11 @@ running_vms()
 }
 
 
+if ! command -v pwrstat &>/dev/null; then
+    printf "Please install pwrstat\\n" >&2
+    exit 1
+fi
+
 if ! pwrstat -status &>/dev/null; then
     printf "pwrstat: permission denied\\n" >&2
     exit 1
