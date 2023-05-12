@@ -216,7 +216,6 @@ repos:
       - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable
       - id: mixed-line-ending
-      - id: trailing-whitespace
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.991
