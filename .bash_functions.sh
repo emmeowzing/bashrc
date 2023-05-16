@@ -241,8 +241,8 @@ repos:
         args:
           - -x
 
-  - repo: https://github.com/bjd2385/circleci-config-pre-commit-hook
-    rev: v1.1.2
+  - repo: https://github.com/bjd2385/dynamic-continuation-orb
+    rev: v3.6.8
     hooks:
       - id: circleci-config-validate
 
