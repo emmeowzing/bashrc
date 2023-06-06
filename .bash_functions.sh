@@ -295,6 +295,15 @@ repos:
     rev: v0.0.7
     hooks:
     -   id: msg-issue-prefix
+
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.77.2
+    hooks:
+     - id: terraform_fmt
+       args:
+         - --args=-no-color
+         - --args=-diff
+         - --args=-write=false
 PRECOMMIT
 
     pre-commit autoupdate
