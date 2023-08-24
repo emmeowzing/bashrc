@@ -3,6 +3,14 @@
 
 
 ##
+# Reset colors.
+reset_colors()
+{
+    tput sgr0
+}
+
+
+##
 # Get a user's response on a question to set environment variables.
 # Call like `X="$(response "Enter your name: " "Emma")"`
 # To set a default value on `X` if the user just hits enter.
