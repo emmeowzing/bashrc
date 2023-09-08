@@ -14,6 +14,7 @@ alias ncp='nc -zv'
 alias base64='base64 -w0' # Never wrap columns of base64'ed-output.
 alias fdisk='sudo fdisk -l | sed -e "/Disk \/dev\/loop/,+5d"'
 alias loop='losetup -fvP --show'
+alias code.='code .'
 
 # Jump Down
 alias 1d='cd ..'
