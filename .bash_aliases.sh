@@ -98,7 +98,21 @@ function gp()
     fi
 }
 alias gcp='ga && gc && gp'
-alias gcm='git checkout master && git pull'
+# alias gcm='git checkout master && git pull'
+
+##
+# Git checkout master or main.
+function gcm()
+{
+    if [ "$(git for-each-ref --format='%(refname:short)' refs/heads/ | grep -o "main")" = "main" ]; then
+        git checkout main && git pull
+    elif [ "$(git for-each-ref --format='%(refname:short)' refs/heads/ | grep -o "master")" = "master" ]; then
+        git checkout master && git pull
+    else
+        _error "neither branches \"main\" nor \"master\" exist on this project."
+    fi
+}
+
 alias gcd='git checkout develop && git pull'
 alias gmm='git merge master'
 alias gmd='git merge develop'
