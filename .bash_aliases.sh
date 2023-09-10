@@ -104,7 +104,7 @@ alias gcp='ga && gc && gp'
 # Git checkout master or main.
 function gcm()
 {
-    if [ "$(git for-each-ref --format='%(refname:short)' refs/heads/ | grep -P "^(master)$")" = "main" ]; then
+    if [ "$(git for-each-ref --format='%(refname:short)' refs/heads/ | grep -P "^(main)$")" = "main" ]; then
         git checkout main && git pull
     elif [ "$(git for-each-ref --format='%(refname:short)' refs/heads/ | grep -P "^(master)$")" = "master" ]; then
         git checkout master && git pull
