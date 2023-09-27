@@ -113,6 +113,7 @@ function gcm()
     fi
 }
 
+alias gbr='git branch'
 alias gcd='git checkout develop && git pull'
 alias gmm='git merge master'
 alias gmd='git merge develop'
