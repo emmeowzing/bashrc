@@ -3,6 +3,7 @@
 
 # Not really an alias, but alias-like. Allows you to run `git exec ...some command` at the root of your repo.
 git config --global alias.exec '!exec '
+git config --global pull.rebase true
 
 alias watch='watch -d '
 alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status; atq'
