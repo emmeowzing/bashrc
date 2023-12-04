@@ -364,6 +364,7 @@ kcopysecret()
 
 alias hsr='helm search repo' # <repo> to list chart versions available in a repo
 alias hrl='helm repo list'
+alias hdb='helm dependency build'
 alias hru='helm repo update'
 alias hsu='helm search repo'
 alias hdu='helm dependency update'
