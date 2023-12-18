@@ -194,7 +194,7 @@ precommit()
     cat << PRECOMMIT > .pre-commit-config.yaml
 fail_fast: true
 repos:
-  - repo: https://github.com/bjd2385/pre-commit-gitlabci-lint
+  - repo: https://github.com/emmeowzing/pre-commit-gitlabci-lint
     rev: v1.1.5
     hooks:
       - id: gitlabci-lint
@@ -249,12 +249,12 @@ repos:
         args:
           - -x
 
-  - repo: https://github.com/bjd2385/dynamic-continuation-orb
+  - repo: https://github.com/emmeowzing/dynamic-continuation-orb
     rev: v3.6.8
     hooks:
       - id: circleci-config-validate
 
-  - repo: https://github.com/bjd2385/circleci-orb-pre-commit-hook
+  - repo: https://github.com/emmeowzing/circleci-orb-pre-commit-hook
     rev: v1.3.2
     hooks:
     - id: circleci-orb-validate
