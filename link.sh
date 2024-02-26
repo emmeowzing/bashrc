@@ -17,10 +17,10 @@ fi
 
 
 # Add references to ~/.bash_{functions,aliases} automatically to ~/.bashrc
-if [ "$(grep "source ~/.bash_functions" ~/.bashrc)" = "" ] || [ "$(grep ". ~/.bash_functions" ~/.bashrc)" = "" ]; then
-    printf "source ~/.bash_functions\\n" >> ~/.bashrc
+if [ "$(grep "source ~/.bash_functions" ~/.zshrc)" = "" ] || [ "$(grep ". ~/.bash_functions" ~/.zshrc)" = "" ]; then
+    printf "source ~/.bash_functions\\n" >> ~/.zshrc
 fi
 
 if [ "$(grep "source ~/.bash_aliases" ~/.bashrc)" = "" ] || [ "$(grep ". ~/.bash_aliases" ~/.bashrc)" = "" ]; then
-    printf "source ~/.bash_aliases\\n" >> ~/.bashrc
+    printf "source ~/.bash_aliases\\n" >> ~/.zshrc
 fi

@@ -5,6 +5,7 @@
 git config --global alias.exec '!exec '
 git config --global pull.rebase true
 
+alias less='less -R'
 alias watch='watch -d '
 alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status; atq'
 alias c='clear'
