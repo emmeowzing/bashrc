@@ -41,7 +41,7 @@ alias l='ls -CF'
 
 # Terraform
 alias tfswitch='tfswitch -b $HOME/bin/terraform'
-alias tf=terraform
+#alias tf=terraform
 
 # "alert" for long running commands with notify-send.
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history | tail -n1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'

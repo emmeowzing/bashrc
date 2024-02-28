@@ -16,11 +16,21 @@ else
 fi
 
 
-# Add references to ~/.bash_{functions,aliases} automatically to ~/.bashrc
-if [ "$(grep "source ~/.bash_functions" ~/.zshrc)" = "" ] || [ "$(grep ". ~/.bash_functions" ~/.zshrc)" = "" ]; then
-    printf "source ~/.bash_functions\\n" >> ~/.zshrc
-fi
+# Add references to ~/.bash_{functions,aliases} automatically to ~/.bashrc or ~/.zshrc.
+if [ -f ~/.zshrc ]; then
+    if [ "$(grep "source ~/.bash_functions" ~/.zshrc)" = "" ] || [ "$(grep ". ~/.bash_functions" ~/.zshrc)" = "" ]; then
+        printf "source ~/.bash_functions\\n" >> ~/.zshrc
+    fi
 
-if [ "$(grep "source ~/.bash_aliases" ~/.bashrc)" = "" ] || [ "$(grep ". ~/.bash_aliases" ~/.bashrc)" = "" ]; then
-    printf "source ~/.bash_aliases\\n" >> ~/.zshrc
+    if [ "$(grep "source ~/.bash_aliases" ~/.zshrc)" = "" ] || [ "$(grep ". ~/.bash_aliases" ~/.zshrc)" = "" ]; then
+        printf "source ~/.bash_aliases\\n" >> ~/.zshrc
+    fi
+elif [ -f ~/.bashrc ]; then
+    if [ "$(grep "source ~/.bash_functions" ~/.bashrc)" = "" ] || [ "$(grep ". ~/.bash_functions" ~/.bashrc)" = "" ]; then
+        printf "source ~/.bash_functions\\n" >> ~/.bashrc
+    fi
+
+    if [ "$(grep "source ~/.bash_aliases" ~/.bashrc)" = "" ] || [ "$(grep ". ~/.bash_aliases" ~/.bashrc)" = "" ]; then
+        printf "source ~/.bash_aliases\\n" >> ~/.bashrc
+    fi
 fi
