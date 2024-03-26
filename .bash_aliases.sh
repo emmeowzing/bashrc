@@ -327,6 +327,8 @@ alias kgn='kubectl get nodes -o wide'
 alias kgns='kubectl get ns'
 alias kgdb='kubectl get pod,deploy,rs,sts,ds,svc,ingress,secret | less'
 
+alias m='minikube'
+alias mk='minikube kubectl'
 
 # ##
 # # Clean a newly-generated Helm
