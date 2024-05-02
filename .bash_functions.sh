@@ -684,21 +684,41 @@ aws-profile()
 
 aws-exec()
 {
-    aws-vault exec "${AWS_PROFILE}" -- aws "$@"
+    if [ -z "$AWS_PROFILE" ]; then
+        # The profile isn't set, so set one.
+        aws-profile
+    fi
+
+    aws-vault exec "$AWS_PROFILE" -- aws "$@"
 }
 
 aws-rotate()
 {
-    aws-vault rotate "$1"
+    if [ -z "$AWS_PROFILE" ]; then
+        # The profile isn't set, so set one.
+        aws-profile
+    fi
+
+    aws-vault rotate "$AWS_PROFILE"
 }
 
 aws-login()
 {
-    aws-vault login "$1"
+    if [ -z "$AWS_PROFILE" ]; then
+        # The profile isn't set, so set one.
+        aws-profile
+    fi
+
+    aws-vault login "$AWS_PROFILE"
 }
 
 tf()
 {
+    if [ -z "$AWS_PROFILE" ]; then
+        # The profile isn't set, so set one.
+        aws-profile
+    fi
+
     aws-vault exec "${AWS_PROFILE}" -- terraform "$@"
 }
 
