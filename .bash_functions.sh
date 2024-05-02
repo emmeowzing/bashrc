@@ -676,6 +676,12 @@ aws-add()
     aws-vault add "$profile" --env
 }
 
+aws-profile()
+{
+    AWS_PROFILE="$(aws-vault list --profiles | fzf -q "dev")"
+    export AWS_PROFILE
+}
+
 aws-exec()
 {
     aws-vault exec "${AWS_PROFILE}" -- aws "$@"
