@@ -651,7 +651,32 @@ vv()
 
 ##
 # AWS helper commands
-aws()
+aws-add()
+{
+    if [ $# -ne 2 ]; then
+        printf "ERROR: Expected 2 arguments: passstore path (req'd keys, \$prefix/access_keys/access-key-id, \$prefix/access_keys/secret-access-key), aws-vault profile name. received %i.\\n" "$#" >&2
+        return 1
+    fi
+
+    local path profile
+    path="$1"
+    profile="$2"
+
+    AWS_ACCESS_KEY_ID="$(pass show "$path"/access_keys/access-key-id)"
+    export AWS_ACCESS_KEY_ID
+
+    AWS_SECRET_ACCESS_KEY="$(pass show "$path"/access_keys/secret-access-key)"
+    export AWS_SECRET_ACCESS_KEY
+
+    if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
+        printf "ERROR: AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY is empty. Please double-check Linux pass store.\\n" >&2
+        return 1
+    fi
+
+    aws-vault add "$profile" --env
+}
+
+aws-exec()
 {
     aws-vault exec "${AWS_PROFILE}" -- aws "$@"
 }
