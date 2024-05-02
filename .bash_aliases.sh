@@ -18,6 +18,8 @@ alias fdisk='sudo fdisk -l | sed -e "/Disk \/dev\/loop/,+5d"'
 alias loop='losetup -fvP --show'
 alias code.='code .'
 
+alias co='code "$(git rev-parse --show-toplevel)"'
+
 # Jump Down
 alias 1d='cd ..'
 alias 2d='1d && 1d'
@@ -380,8 +382,12 @@ alias dockerconfigjson='k create secret generic --type=kubernetes.io/dockerconfi
 
 # Random utilities
 alias lsblkl='lsblk -e7'
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
+
+if [[ ! "$OSTYPE" =~ darwin* ]]; then
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+fi
+
 alias nmap='nmap --reason'
 alias shellcheck='shellcheck -x'
 
