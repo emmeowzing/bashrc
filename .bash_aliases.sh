@@ -13,7 +13,6 @@ alias untar='tar -zxvf'
 alias pcau='pre-commit auto-update'
 alias dig='dig +noall +answer'
 alias ncp='nc -zv'
-alias base64='base64 -w0' # Never wrap columns of base64'ed-output.
 alias fdisk='sudo fdisk -l | sed -e "/Disk \/dev\/loop/,+5d"'
 alias loop='losetup -fvP --show'
 alias code.='code .'
@@ -386,6 +385,7 @@ alias lsblkl='lsblk -e7'
 if [[ ! "$OSTYPE" =~ darwin* ]]; then
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
+    alias base64='base64 -w0'
 fi
 
 alias nmap='nmap --reason'

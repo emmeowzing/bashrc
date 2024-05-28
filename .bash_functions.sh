@@ -440,25 +440,29 @@ resize()
 
 
 ##
-# Switch rancher cluster contexts.
-rancher_cluster()
-{
-    if [ $# -ne 1 ]; then
-        _error "** Please provide a cluster name."
-        return 1
-    fi
+# Instead of using the below, see my gist.
+# https://gist.github.com/emmeowzing/b9425e3cad33f871e278d135ea8bad1a
 
-    local cluster="$1"
+# ##
+# # Switch rancher cluster contexts.
+# rancher_cluster()
+# {
+#     if [ $# -ne 1 ]; then
+#         _error "** Please provide a cluster name."
+#         return 1
+#     fi
 
-    if [ ! -d "$HOME/.kube" ]; then
-        mkdir "$HOME/.kube"
-    fi
+#     local cluster="$1"
 
-    rancher clusters kf "$cluster" > "$HOME/.kube/config"
-    export KUBECONFIG="$HOME"/.kube/config
+#     if [ ! -d "$HOME/.kube" ]; then
+#         mkdir "$HOME/.kube"
+#     fi
 
-    return 0
-}
+#     rancher clusters kf "$cluster" > "$HOME/.kube/config"
+#     export KUBECONFIG="$HOME"/.kube/config
+
+#     return 0
+# }
 
 
 ##
@@ -657,6 +661,8 @@ aws-add()
         printf "ERROR: Expected 2 arguments: passstore path (req'd keys, \$prefix/access_keys/access-key-id, \$prefix/access_keys/secret-access-key), aws-vault profile name. received %i.\\n" "$#" >&2
         return 1
     fi
+
+    ## TODO: $ pass find access_keys
 
     local path profile
     path="$1"

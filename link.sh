@@ -15,6 +15,12 @@ else
     printf "INFO: Skipping link to ~/.bash_aliases, file already exists.\\n"
 fi
 
+if [ ! -f ~/.bash_env ]; then
+    ln -s "$(pwd)/.bash_env.sh" ~/.bash_env
+else
+    printf "INFO: Skipping link to ~/.bash_env, file already exists.\\n"
+fi
+
 
 # Add references to ~/.bash_{functions,aliases} automatically to ~/.bashrc or ~/.zshrc.
 if [ -f ~/.zshrc ]; then
@@ -25,6 +31,10 @@ if [ -f ~/.zshrc ]; then
     if [ "$(grep "source ~/.bash_aliases" ~/.zshrc)" = "" ] || [ "$(grep ". ~/.bash_aliases" ~/.zshrc)" = "" ]; then
         printf "source ~/.bash_aliases\\n" >> ~/.zshrc
     fi
+
+    if [ "$(grep "source ~/.bash_env" ~/.zshrc)" = "" ] || [ "$(grep ". ~/.bash_env" ~/.zshrc)" = "" ]; then
+        printf "source ~/.bash_env\\n" >> ~/.zshrc
+    fi
 elif [ -f ~/.bashrc ]; then
     if [ "$(grep "source ~/.bash_functions" ~/.bashrc)" = "" ] || [ "$(grep ". ~/.bash_functions" ~/.bashrc)" = "" ]; then
         printf "source ~/.bash_functions\\n" >> ~/.bashrc
@@ -32,5 +42,9 @@ elif [ -f ~/.bashrc ]; then
 
     if [ "$(grep "source ~/.bash_aliases" ~/.bashrc)" = "" ] || [ "$(grep ". ~/.bash_aliases" ~/.bashrc)" = "" ]; then
         printf "source ~/.bash_aliases\\n" >> ~/.bashrc
+    fi
+
+    if [ "$(grep "source ~/.bash_env" ~/.bashrc)" = "" ] || [ "$(grep ". ~/.bash_env" ~/.bashrc)" = "" ]; then
+        printf "source ~/.bash_env\\n" >> ~/.bashrc
     fi
 fi
