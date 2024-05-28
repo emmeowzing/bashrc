@@ -10,6 +10,13 @@ reset_colors()
 }
 
 
+## Remove colors from a file in pipe.
+remove_colors()
+{
+    sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g"
+}
+
+
 ##
 # Get a user's response on a question to set environment variables.
 # Call like `X="$(response "Enter your name: " "Emma")"`
