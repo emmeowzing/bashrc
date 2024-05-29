@@ -10,7 +10,8 @@ reset_colors()
 }
 
 
-## Remove colors from a file in pipe.
+##
+# Remove colors from a file in pipe.
 remove_colors()
 {
     sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g"
