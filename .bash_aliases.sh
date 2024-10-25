@@ -15,9 +15,31 @@ alias dig='dig +noall +answer'
 alias ncp='nc -zv'
 alias fdisk='sudo fdisk -l | sed -e "/Disk \/dev\/loop/,+5d"'
 alias loop='losetup -fvP --show'
-alias code.='code .'
 
-alias co='code "$(git rev-parse --show-toplevel)"'
+alias code.='co'
+
+##
+# Alias opening vscode.
+function co()
+{
+    local directory
+
+    if [ $# -gt 0 ]; then
+        if [ $# -gt 1 ]; then
+            printf "WARNING: Function \"co\" expects at most 1 argument: path to open with \"code\". Ignoring additional arguments." >&2
+        fi
+
+        directory="$1"
+    elif [ $# -eq 0 ]; then
+        directory="$(git rev-parse --show-toplevel 2>/dev/null)"
+    fi
+
+    if [ "$directory" = "" ]; then
+        code .
+    else
+        code "$directory"
+    fi
+}
 
 # Jump Down
 alias 1d='cd ..'
