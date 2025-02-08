@@ -172,6 +172,22 @@ dependencies()
 
 
 ##
+# Updates a system.
+update()
+{
+    if [ ! -f /etc/os-release ]; then
+        _error "File /etc/os-release does not exist."
+    elif [ "$(grep -oP "(?<=ID_LIKE=).*" /etc/os-release)" = "debian" ]; then
+        sudo apt update \
+            && sudo apt upgrade -y \
+            && sudo apt autoremove -y
+    else
+        _warning "Update not implemented for this OS release:\\n\\n%s\\n" "$(cat /etc/os-release)"
+    fi
+}
+
+
+##
 # Drop a .gitignore in my cwd with the most common files I try not to include.
 gitignore()
 {
