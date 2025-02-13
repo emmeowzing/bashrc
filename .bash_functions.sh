@@ -177,12 +177,15 @@ update()
 {
     if [ ! -f /etc/os-release ]; then
         _error "File /etc/os-release does not exist."
+        return 1
     elif [ "$(grep -oP "(?<=ID_LIKE=).*" /etc/os-release)" = "debian" ]; then
         sudo apt update \
             && sudo apt upgrade -y \
             && sudo apt autoremove -y
+        return $?
     else
         _warning "Update not implemented for this OS release:\\n\\n%s\\n" "$(cat /etc/os-release)"
+        return 1
     fi
 }
 
