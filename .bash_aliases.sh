@@ -9,6 +9,11 @@ if command -v ggrep &>/dev/null; then
     alias grep=ggrep
 fi
 
+if [ -f "$HOME"/projects/sbevision/devops/gitlab-ci-scripts/kcc/racher.sh ]; then
+    alias kcc='$HOME/projects/sbevision/devops/gitlab-ci-scripts/kcc/racher.sh'
+else
+    _warning "SBE Vision's kcc/rancher.sh-script does not exist."
+fi
 alias less='less -R'
 alias watch='watch -d '
 alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status; atq'
