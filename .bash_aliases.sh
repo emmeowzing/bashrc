@@ -5,6 +5,10 @@
 git config --global alias.exec '!exec '
 git config --global pull.rebase true
 
+if command -v ggrep &>/dev/null; then
+    alias grep=ggrep
+fi
+
 alias less='less -R'
 alias watch='watch -d '
 alias a='zl; zs; zi; va; vmproccount; nvidia-smi; sudo pwrstat -status; atq'
