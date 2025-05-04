@@ -9,8 +9,8 @@ if command -v ggrep &>/dev/null; then
     alias grep=ggrep
 fi
 
-if [ -f "$HOME"/projects/sbevision/devops/gitlab-ci-scripts/kcc/racher.sh ]; then
-    alias kcc='$HOME/projects/sbevision/devops/gitlab-ci-scripts/kcc/racher.sh'
+if [ -f "$HOME"/projects/sbevision/devops/gitlab-ci-scripts/kcc/rancher.sh ]; then
+    alias kcc='$HOME/projects/sbevision/devops/gitlab-ci-scripts/kcc/rancher.sh'
 else
     _warning "SBE Vision's kcc/rancher.sh-script does not exist."
 fi
