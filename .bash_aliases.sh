@@ -411,7 +411,14 @@ alias dockercfg='k create secret generic --type=kubernetes.io/dockercfg --from-f
 alias dockerconfigjson='k create secret generic --type=kubernetes.io/dockerconfigjson --from-file=.dockerconfigjson=$HOME/.docker/config.json dockercfg-secret --dry-run=client -o yaml'
 
 # Random utilities
-alias lsblkl='lsblk -e7'
+function lsblkl()
+{
+    if [ "$(uname -s)" = "Darwin" ]; then
+        diskutil list
+    else
+        lsblk -e7
+    fi
+}
 
 if [[ ! "$OSTYPE" =~ darwin* ]]; then
     alias pbcopy='xclip -selection clipboard'
